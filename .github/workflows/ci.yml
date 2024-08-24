@@ -14,18 +14,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: Cyberboss/install-winget@v1
     - run: winget --version
-    - run: winget install wingetcreate
-    - name: Add winget-dotenvx source
-      run: |
-        winget source add --name winget-dotenvx --arg https://github.com/dotenvx/winget-dotenvx
+    - run: winget source add --name winget-dotenvx --arg https://github.com/dotenvx/winget-dotenvx
       shell: powershell
-
     - name: install dotenvx.dotenvx
       run: |
         winget install dotenvx.dotenvx
       shell: powershell
-
-    - name: Verify installation
+    - name: verify install
       run: |
         dotenvx --version
       shell: powershell
