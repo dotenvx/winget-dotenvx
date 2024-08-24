@@ -1,0 +1,30 @@
+name: test winget
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-winget-install:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Add winget-dotenvx source
+      run: |
+        winget source add --name winget-dotenvx --arg https://github.com/dotenvx/winget-dotenvx
+      shell: powershell
+
+    - name: Install dotenvx.dotenvx
+      run: |
+        winget install dotenvx.dotenvx
+      shell: powershell
+
+    - name: Verify installation
+      run: |
+        dotenvx --version
+      shell: powershell
