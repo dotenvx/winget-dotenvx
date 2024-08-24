@@ -11,15 +11,10 @@ jobs:
   test-winget-install:
     runs-on: windows-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: install winget
-      uses: Cyberboss/install-winget@v1
-
-    - name: verify winget installed
-      run: winget --version
-
+    - uses: actions/checkout@v2
+    - uses: Cyberboss/install-winget@v1
+    - run: winget --version
+    - run: winget install wingetcreate
     - name: Add winget-dotenvx source
       run: |
         winget source add --name winget-dotenvx --arg https://github.com/dotenvx/winget-dotenvx
