@@ -14,12 +14,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Install Winget if not available
-      run: |
-        if (!(winget --version)) {
-          Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appxbundle -OutFile winget.appxbundle
-          Add-AppxPackage .\winget.appxbundle
-        }
+    - name: install winget
+      uses: Cyberboss/install-winget@v1
 
     - name: verify winget installed
       run: winget --version
@@ -29,7 +25,7 @@ jobs:
         winget source add --name winget-dotenvx --arg https://github.com/dotenvx/winget-dotenvx
       shell: powershell
 
-    - name: Install dotenvx.dotenvx
+    - name: install dotenvx.dotenvx
       run: |
         winget install dotenvx.dotenvx
       shell: powershell
